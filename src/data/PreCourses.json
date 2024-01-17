@@ -1,0 +1,8 @@
+{
+    "Net-centric Programming": ["Computer Networks"],
+    "Internet of Things": ["Computer Networks"],
+    "OS": ["DSA", "Computer Architecture"],
+    "Mobile Application Development": ["OOAD", "OOP", "C/C++ Programming"],
+    "WebApp": ["OOP", "PDM", "C/C++ Programming"],
+    "OOAD": ["OOP", "C/C++ Programming"]
+}

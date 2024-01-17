@@ -1,0 +1,105 @@
+.overview {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.overview header {
+    background-color: white;
+    padding: 10px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.overview header h1 {
+    margin-left: 20px;
+}
+
+.overview header .right-side {
+    display: flex;
+}
+
+.overview header .right-side input, .overview header .right-side div {
+    background-color: #F5F5F7;
+}
+
+.overview header .right-side input {
+    width: 250px;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+    padding: 15px 10px;
+    font-size: 16px;
+}
+
+.overview header .right-side div {
+    cursor: pointer;
+    width: 35px;
+    margin: 0 20px 0 5px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.right-side div svg {
+    font-size: 16px;
+}
+
+.overview-content {
+    flex-grow: 1;
+    padding: 30px 25px 10px 25px;
+    display: flex;
+}
+
+.overview-content .left, .overview-content .svg-container{
+    margin: 0 5px;
+}
+
+.overview-content .left {
+    width: 30%;
+}
+
+.overview-content .left h3 {
+    align-items: center;
+}
+
+.overview-content .left .child {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.overview-content .left .container {
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.overview-content .svg-container {
+    width: 70%;
+}
+
+
+.title {
+    color: #959b9b;
+    font-size: 16px;
+}
+
+.stat {
+    color: black;
+    font-weight: 400;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.overview-content .svg-container .container {
+    border-radius: 10px;
+    background-color: white;
+}
+
+.select{
+    background-color: white;
+}

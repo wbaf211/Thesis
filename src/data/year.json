@@ -1,0 +1,10 @@
+{
+    "1-sophomore": ["OOP", "C/C++ Programming"], 
+    "2-sophomore": ["Computer Networks", "CA"],
+    "1-junior": ["PDM", "WebApp"],
+    "2-junior": ["OS", "DSA"],
+    "1-senior": ["OOAD", "Internet of Things", "Net-centric Programming"],
+    "2-senior": ["Mobile Application Development", "Software Engineering", "AI"]
+}
+
+

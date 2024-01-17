@@ -1,0 +1,18 @@
+.total {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.total .lower {
+    margin-top: 5px;
+    flex-grow: 1;
+    width: 830px;
+    text-wrap: nowrap;
+    overflow: scroll;
+    display: flex;
+}
+
+.total .lower svg {
+    margin: 0 5px;
+}

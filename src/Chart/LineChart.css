@@ -1,0 +1,60 @@
+.x-axis, .y-axis {
+    font-size: 15px;
+}
+
+.bar {
+    stroke: none;
+    fill-opacity: 0.7;
+    transition: fill-opacity 0.2s ease-out;
+}
+
+.bar.hovered {
+    fill-opacity: 1;
+}
+
+.line-chart {
+    height: 100%;
+    width: 830px;
+}
+
+.grid-line {
+    stroke: #ddd;
+    stroke-width: 1;
+    shape-rendering: crispEdges; 
+}
+
+.tooltip {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    padding: 10px;
+    font-size: 14px;
+    pointer-events: none; /* Ngăn tooltip chặn các sự kiện chuột khác */
+    z-index: 999; /* Đảm bảo tooltip hiển thị trên mọi thứ */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tooltip strong {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Nếu muốn thêm animation */
+.tooltip-enter {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.tooltip-enter-active {
+    opacity: 1;
+}
+
+.tooltip-exit {
+    opacity: 1;
+}
+
+.tooltip-exit-active {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}

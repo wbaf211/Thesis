@@ -1,0 +1,13 @@
+.pie-chart_container {
+    background-color: white;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.pie-chart_container h1 {
+    text-align: center;
+}
+
+.pie-chart_container:not(:first-child) {
+    margin-left: 10px;
+}

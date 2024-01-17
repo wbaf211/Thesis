@@ -1,0 +1,140 @@
+.compare {
+    width: 100%;
+    height: 100%;
+    background-color: #F5F5F7;
+    overflow-y: hidden;
+}
+
+.compare header h1 {
+    background-color: white;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.compare .button-container {
+    background-color: black;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.compare .button-container button {
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.compare .compare-section {
+    height: 100%;
+    padding: 5px 5px 0;
+    display: flex;
+}
+
+.compare .compare-section .studentList-container {
+    background-color: white;
+    margin: 5px 5px;
+    width: 300px;
+    height: 630px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.compare .compare-section .studentList-container .student-container {
+    background-color: #F8F9FF;
+    margin: 10px 5px 0;
+    border-radius: 5px;
+    padding-left: 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.compare .compare-section .chartList-container {
+    margin-top: 5px;
+    padding: 0 5px ;
+    flex: 1;
+    overflow: scroll;
+    height: 100%;
+}
+
+.compare .compare-section .chartList-container .chart-container {
+    background-color: white;
+    height: 300;
+}
+
+.compare .compare-section .chartList-container .chart-container:not(:first-child) {
+    margin: 10px 0;
+    height: 500px;
+}
+
+.compare .window {
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px
+}
+
+.compare .window .table-container {
+    background-color: white;
+    width: 100%;
+    padding: 20px 10px;
+}
+
+.compare .window .filter-section,  .compare .window .filter-section .left-side, .compare .window .filter-section .right-side{
+    display: flex;
+}
+
+.compare .window .filter-section {
+    justify-content: space-between;
+}
+
+.compare .window .filter-section .filter:first-child {
+    width: 300px;
+}
+
+.compare .window .filter-section .filter {
+    width: 180px;
+    margin: 0 10px;
+}
+
+.compare .window .button-section {
+    margin-top: 10px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: end;
+    height: 30px;
+}
+
+.compare .window .button-section button:first-child {
+    margin-right: 10px;
+}
+
+.compare .window .button-section button {
+    width: 80px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+#okButton {
+    background-color: #2EFF2E;
+}
+
+#cancelButton {
+    background-color: #FF2E2E;
+}
+
+:where(.css-dev-only-do-not-override-1vr7spz).ant-select-multiple .ant-select-selection-overflow {
+    flex-wrap: nowrap;
+    overflow: hidden;
+}

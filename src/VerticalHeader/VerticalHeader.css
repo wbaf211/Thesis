@@ -1,0 +1,46 @@
+.vertical-header {
+    background-color: #14171f;
+    min-width: 250px;
+    width: 250px;
+    height: 100%;
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.vertical-header img {
+    width: 100px;
+    display: block;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+.vertical-header .nav-section ul {
+    color: #54575c;
+}
+
+.vertical-header .nav-section ul li {
+    cursor: pointer;
+    padding: 10px 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.vertical-header .nav-section ul li .word {
+    margin-left: 25px;
+}
+
+.vertical-header .filter-section {
+    height: 100%;
+    padding-top: 50px;
+}
+
+.filter-section .filter {
+    display: block;
+    margin: 10px 0;
+}
+
+.active {
+    background-color: #35363e;
+    color: white;
+}
