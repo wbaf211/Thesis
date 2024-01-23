@@ -1,5 +1,5 @@
 import React from "react";
-import LineChart from "../Chart/LineChart";
+import LineChart from "../../../Chart/LineChart";
 
 function Excellent({ sortedKey, overviewData}) {
 
@@ -8,7 +8,7 @@ function Excellent({ sortedKey, overviewData}) {
 
     return (
         <div className="excellent">
-            <LineChart totalStudentByYearList={overviewData} hKey={`Excellent`} sortedKeys={sortedKey} title={"The Student Distribution Chart by Year"}/>
+            <LineChart totalStudentByYearList={overviewData} hKey={`Excellent`} sortedKeys={sortedKey} title={"The Excellent Student Distribution Chart by Year"}/>
         </div>
     );
 }

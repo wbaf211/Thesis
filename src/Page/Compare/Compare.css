@@ -58,6 +58,7 @@
     flex: 1;
     overflow: scroll;
     height: 100%;
+    margin-bottom: 10px;
 }
 
 .compare .compare-section .chartList-container .chart-container {
@@ -68,6 +69,16 @@
 .compare .compare-section .chartList-container .chart-container:not(:first-child) {
     margin: 10px 0;
     height: 500px;
+}
+
+.compare .compare-section .chartList-container .chart-container .filter-contain {
+    padding: 10px 0 0 0;
+    margin: 0 0 0 10px;
+}
+
+.compare .compare-section .chartList-container .chart-container .filter {
+    width: 125px;
+    margin: 0 10px;
 }
 
 .compare .window {

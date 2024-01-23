@@ -6,10 +6,12 @@ function LineChart({ totalStudentByYearList, hKey, sortedKeys, title }) {
     const svgRef = useRef();
     const [tooltipData, setTooltipData] = useState(null);
 
+    console.log("d3: ", d3)
+
     useEffect(() => {
-        const margin = { top: 20, bot: 50, left: 20, right: 100 };
+        const margin = { top: 20, bot: 50, left: 20, right: 200 };
         const containerHeight = 300;
-        const width = 700 - margin.left - margin.right;
+        const width = 800 - margin.left - margin.right;
         const height = containerHeight + 40 - margin.top - margin.bot - 25;
 
         const svg = d3.select(svgRef.current)

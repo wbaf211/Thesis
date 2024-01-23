@@ -5,15 +5,14 @@ import {
     SearchOutlined
 } from '@ant-design/icons';
 import Total from "../Total/Total";
-import Excellent from "../../Excellent/Excellent";
-import Good from "../../Good/Good";
-import Average from "../../Average/Average";
-import Bad from "../../Bad/Bad";
-import courses from '../../data/Course.json';
+import Excellent from "../Classify/Excellent/Excellent";
+import Good from "../Classify/Good/Good";
+import Average from "../Classify/Average/Average";
+import Bad from "../Classify/Bad/Bad";
+import AverageGood from "../Classify/AverageGood/AverageGood";
 import { Select } from "antd";
-import AverageGood from "../../AverageGood/AverageGood";
 
-function Overview({ totalStudentByYearList, overviewStudent, overviewData, sortedKey, testData, studentListByClassify, uniqueCourses }) {
+function Overview({ overviewStudent, overviewData, sortedKey, testData, studentListByClassify, uniqueCourses }) {
 
     const list = {
         Excellent: [],
@@ -35,6 +34,15 @@ function Overview({ totalStudentByYearList, overviewStudent, overviewData, sorte
             list.Bad.push(obj);
         }
     }
+
+    
+    const iuii = [
+        { x: 1, y: 5 },
+        { x: 2, y: 9 },
+        { x: 3, y: 7 },
+        { x: 4, y: 3 },
+        { x: 5, y: 6 },
+    ];
 
     return (
         <div className="overview">
@@ -91,7 +99,7 @@ function Overview({ totalStudentByYearList, overviewStudent, overviewData, sorte
 
                 <div className="svg-container">
                     {select === 1 && (
-                        <Total totalStudentByYearList={totalStudentByYearList} sortedKey={sortedKey} overviewStudent={overviewStudent} overviewData={overviewData}/>
+                        <Total sortedKey={sortedKey} overviewStudent={overviewStudent} overviewData={overviewData} scatterPlotData={iuii}/>
                     )} 
                     {select === 2 && (
                         <Excellent overviewData={overviewData} sortedKey={sortedKey}/>

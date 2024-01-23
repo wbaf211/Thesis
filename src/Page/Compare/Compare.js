@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import '../Compare/Compare.css';
-import SUBJECTS from '../../data/Course.json';
 import PRE from '../../data/PreCourses.json';
 import year from '../../data/year.json'
 import {
@@ -11,13 +10,14 @@ import {
 } from '@ant-design/icons';
 import { Select, Table } from "antd";
 import RadarChart from "../../Chart/RadarChart";
-import GrpLineChart from "../../Chart/GrpLineChart";
 import DLineChart from "../../Chart/dLineChart";
+import GBarChart from "../../Chart/GBarChart";
 
 let list;
 let preList = [];
+let xAxisData = [];
 
-function Compare({sortedKey, newList, uniqueCourses, data, classify}) {
+function Compare({sortedKey, semesterArray, newList, uniqueCourses, data, classify}) {
 
     console.log("tabData: ", data);
 
@@ -35,6 +35,8 @@ function Compare({sortedKey, newList, uniqueCourses, data, classify}) {
     }
     
     const uniqueSchoolsArray = extractUniqueSchools(data);
+
+    console.log("uniqueSchoolsArray: ", uniqueSchoolsArray)
 
     let dataSource = data;
     let tempData = data;
@@ -77,8 +79,6 @@ function Compare({sortedKey, newList, uniqueCourses, data, classify}) {
     //     }
     // }
 
-    const linechartData = [10, 20, 15, 25, 18, 30];
-
     const datum = {};
 
     for (let i = 0; i < newList?.length; i++) {
@@ -86,7 +86,6 @@ function Compare({sortedKey, newList, uniqueCourses, data, classify}) {
     }
 
     const [open, isOpen] = useState(false);
-    const [radarData, setRadarData] = useState([]);
     const [selectedRows, setSelectedRows] = useState([]);
     const [selectedRowKeys, setSelectedRowKeys] = useState();
 
@@ -95,6 +94,109 @@ function Compare({sortedKey, newList, uniqueCourses, data, classify}) {
     const [year, getYear] = useState();
     const [course, getCourse] = useState();
     const [key, setKey] = useState(0);
+
+    // Hàm để lấy ra các key không trùng nhau từ "semesters"
+    const getUniqueSemesterKeys = (data) => {
+        const uniqueKeysSet = new Set();
+    
+        data.forEach((item) => {
+        if (item.semesters) {
+            Object.keys(item.semesters).forEach((key) => {
+            uniqueKeysSet.add(key);
+            });
+        }
+    });
+    
+        return Array.from(uniqueKeysSet).sort((a, b) => {
+            const yearA = a.substr(-4);
+            const yearB = b.substr(-4);
+            const yearComparison = yearA.localeCompare(yearB);
+        
+            if (yearComparison !== 0) {
+                return yearComparison;
+            }
+    
+            return a.localeCompare(b);
+        });
+    };
+
+    const xAxisData = getUniqueSemesterKeys(selectedRows)
+
+    console.log("xAxisData: ", xAxisData)
+
+    //Hàm để format lại selectedRows thàng GBarChar data
+    function processData(data, xAxisData) {
+        const result = [];
+
+    data.forEach(item => {
+    const groupId = item.id;
+    const semestersData = item.semesters;
+
+    xAxisData.forEach(xAxisItem => {
+        const category = xAxisItem;
+        const avgValue = semestersData[xAxisItem] ? semestersData[xAxisItem].Avg : null;
+        const trueValue = avgValue !== null ? avgValue : null;
+
+        result.push({
+        group: groupId,
+        category,
+        value: avgValue !== null ? avgValue : 70,
+        trueValue
+        });
+    });
+});
+
+    return result;
+    }
+
+    const processedData = processData(selectedRows, xAxisData);
+
+    console.log("processedData: ", processedData)
+
+    function createRadarData(data1, data2) {
+        const newArray = [];
+        const defaultValue = 7.007;
+
+        data1.forEach(item => {
+            const newItem = {};
+
+        data2.forEach(semester => {
+        const avgValue = item.semesters[semester] ? item.semesters[semester].Avg / 10 : defaultValue;
+        newItem[semester] = avgValue;
+    });
+
+        newArray.push(newItem);
+    });
+
+        return newArray;
+    }
+
+    const radarData = createRadarData(selectedRows, xAxisData);
+
+    console.log("radarData: ", radarData)
+
+    function createDLineChart(data1, data2) {
+        let resultArray = [];
+
+        data1.forEach(item => {
+        let subArray = [];
+
+        data2.forEach(semester => {
+        if (item.semesters && item.semesters[semester] && item.semesters[semester].Avg) {
+            subArray.push(item.semesters[semester].Avg);
+        } else {
+            subArray.push(70.07);
+        }
+    });
+
+        resultArray.push({ id: item.id, values: subArray });
+    });
+
+        return resultArray;
+    }
+    
+    const DLineChartData = createDLineChart(selectedRows, xAxisData);
+    console.log("DLineChartData: ", DLineChartData);
 
     if (spec === undefined && year === undefined && school === undefined) {
         dataSource = data
@@ -249,7 +351,7 @@ function Compare({sortedKey, newList, uniqueCourses, data, classify}) {
             </div>
 
             <div className="compare-section">
-                {selectedRows?.length > 0 && (
+                {list?.length > 0 && (
                     <div className="studentList-container">
                         <React.Fragment>
                             {
@@ -279,8 +381,15 @@ function Compare({sortedKey, newList, uniqueCourses, data, classify}) {
                 <div className="chartList-container">
                     {list?.length > 0 && (
                         <div>
-                            <div className="chart-container"><RadarChart/></div>
-                            <div className="chart-container"><DLineChart data={linechartData}/></div>
+                            <div className="chart-container"><RadarChart data={radarData} labelData={xAxisData} selectedRows={selectedRows}/></div>
+                            <div className="chart-container">
+                                <h1 style={{margin: "10px"}}>Student Comparison Scatter Plot Chart</h1>
+                                <DLineChart semesterArray={semesterArray} data={DLineChartData} xAxisData={xAxisData}/>
+                            </div>
+                            <div className="chart-container">
+                                <h1 style={{margin: "10px"}}>Group Bar Chart For Student Comparison</h1>
+                                <GBarChart data={processedData} xAxisData={xAxisData}/>
+                            </div>
                         </div>
                     )}
                 </div>
@@ -383,17 +492,23 @@ function Compare({sortedKey, newList, uniqueCourses, data, classify}) {
                             bordered 
                             columns={columns} 
                             dataSource={dataSource} 
-                            pagination={{position: ["topCenter"], pageSize: 10}}
+                            pagination={{ position: ["topCenter"], pageSize: 10 }}
                             rowSelection={{
                                 selectedRowKeys: selectedRowKeys,
-                                onChange:(selectedRowKeys, selectedRows) => {
-                                    setSelectedRowKeys(selectedRowKeys);
-                                    setSelectedRows(selectedRows);
-                                    console.log("selectedRowKeys: ", selectedRowKeys)
-                                    console.log("selectedRows: ", selectedRows)
-                                    }
-                                }} 
-                            />
+                                onChange: (selectedRowKeys, selectedRows) => {
+                                
+                                if (selectedRowKeys.length > 5) {
+                                    return alert("Due to my lack of abilities, you can only choose 5 students in one comparison. Sorry for this inconvenience");
+                                }
+                        
+                                setSelectedRowKeys(selectedRowKeys);
+                                setSelectedRows(selectedRows);
+                        
+                                console.log("selectedRowKeys: ", selectedRowKeys);
+                                console.log("selectedRows: ", selectedRows);
+                            }
+                        }} 
+                        />
                         ) : (
                             <Table
                             className="table"
@@ -415,7 +530,7 @@ function Compare({sortedKey, newList, uniqueCourses, data, classify}) {
 
                         <div className="button-section">
                                 <button id="okButton" onClick={() => (list = selectedRows,closeTable())}>OK</button>
-                                <button id="cancelButton" onClick={() => closeTable()}>Cancel</button>
+                                <button id="cancelButton" onClick={() => (closeTable())}>Cancel</button>
                         </div>
                     </div>
                 </div>

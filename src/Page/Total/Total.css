@@ -9,7 +9,6 @@
     flex-grow: 1;
     width: 830px;
     text-wrap: nowrap;
-    overflow: scroll;
     display: flex;
 }
 
